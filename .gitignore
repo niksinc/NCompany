@@ -4,6 +4,11 @@ ehthumbs.db
 
 # Folder config file
 Desktop.ini
+.metadata
+.git
+RemoteSystemsTempFiles
+Servers
+
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
@@ -13,6 +18,7 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+*.class
 
 # Windows shortcuts
 *.lnk
