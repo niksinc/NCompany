@@ -73,7 +73,6 @@ public class EmplpoyeeDaoJdbcTest {
 			catch(DataIntegrityViolationException ex){
 				/* The Employee insert will not have rollback 
 				 * because we have a checked exception */
-				
 				logger.info("Employee isert failed becouse exception"+ex);
 			}
 			assertTrue(empCount == employeeDaojdbc.getEmployeeCount());
