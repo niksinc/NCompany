@@ -1,5 +1,7 @@
 package com.nik.ncompany.dao;
 
+import java.util.List;
+
 import com.nik.ncompany.domain.Employee;
 
 public interface EmployeeDao {
@@ -11,6 +13,7 @@ public interface EmployeeDao {
 	public void deleteEmployee(Employee employee);
 	public int updateEmployee(int empId, Employee employee);
 	public int getEmployeeCount();
+	List<Employee> getEmployeeList();
 	
 
 }

@@ -1,5 +1,7 @@
 package com.nik.ncompany.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -58,8 +60,14 @@ public class EmployeeDaoServiceImpl  implements EmployeeDao{
 		
 		return employeeDaojdbc.getEmployeeCount();
 		
+	}
+	@Override
+	public List<Employee> getEmployeeList(){
+		return employeeDaojdbc.getEmployeeList();
+		
 		
 	}
+	
 	
 	
 

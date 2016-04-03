@@ -124,4 +124,12 @@ public class EmployeeDaojdbc implements EmployeeDao{
 		
 	}
 
+	@Override
+	public List<Employee> getEmployeeList() {
+		String sql = "SELECT * FROM employee";
+		List<Employee> employeeList = jdbcTemplate.query(sql, employeeRowMapper);
+		return employeeList;
+		
+	}
+
 }
