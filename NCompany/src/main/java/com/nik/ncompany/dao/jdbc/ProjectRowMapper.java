@@ -6,32 +6,32 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.nik.ncompany.domain.Department;
+
 import com.nik.ncompany.domain.Project;
 
 public final class ProjectRowMapper implements RowMapper<Project> {
 
 	@Override
 	public Project mapRow(ResultSet resultSet, int row) throws SQLException {
-		String projName;
+		String projName,startDate ,endDate;
 		int deptId,projId;
-		Date projStartDate;
-		Date projEndDate;
 		Project project;
 		
 		projName = resultSet.getString("projName");
 		deptId = resultSet.getInt("deptId");
-		projStartDate =resultSet.getDate("startDate");
-		projEndDate =resultSet.getDate("projEndDate");
-		projEndDate = resultSet.getDate("projEndDate");
+		startDate =resultSet.getString("startDate");
+		endDate =resultSet.getString("endDate");
 		
-		project = new Project(projName, deptId,projStartDate);
+		
+		project = new Project(projName, deptId,startDate);
 		project.setProjId(resultSet.getInt("projId"));
 		project.setProjName(projName);
-		project.setprojStartDate(projStartDate);
-		project.setprojEndDate(projEndDate);
+		project.setdeptId(deptId);
+		project.setStartDate(startDate);
+		project.setEndDate(endDate);
 		
 		return project;
+		
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,6 +20,7 @@ import com.nik.ncompany.dao.EmployeeDao;
 import com.nik.ncompany.domain.Employee;
 
 @Repository("employeeDaojdbc")
+@Transactional
 public class EmployeeDaojdbc implements EmployeeDao{
 
 	@Autowired

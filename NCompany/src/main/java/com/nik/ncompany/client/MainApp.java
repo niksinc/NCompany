@@ -36,8 +36,15 @@ public class MainApp {
 		ProjectDaoServiceImpl projectDaoServiceImpl;
 		projectDaoServiceImpl = (ProjectDaoServiceImpl)container.getBean("projectDaoServiceImpl");
 		//System.out.println(projectDaoServiceImpl.getProjectCount());
-		Project project =new Project("m yproj", 1, new Date(2016,1,1));
+		//Project project =new Project("myproj", 1, new java.util.Date());
+		
+		Project project = new Project("myproj", 1, "2016-12-12");
+		//projectDaoServiceImpl.updateProject(14, project);
 		projectDaoServiceImpl.insertProject(project);
+		//(projectDaoServiceImpl.findProjectById(2).getprojStartDate())
+		//System.out.println();
+		
+		
 		
 		
 	}

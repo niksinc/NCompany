@@ -36,6 +36,11 @@ CREATE TABLE `n_company`.`project` (
   `deptId` INT NOT NULL,
   PRIMARY KEY (`projId`));
 
+ALTER TABLE `n_company`.`project` 
+CHANGE COLUMN `startDate` `startDate` VARCHAR(45) NULL ,
+CHANGE COLUMN `endDate` `endDate` VARCHAR(45) NULL DEFAULT NULL ;
+
+  
   INSERT INTO `n_company`.`project` (`projName`, `startDate`, `deptId`) VALUES ('phpproj', '2016-2-2', '1');
 INSERT INTO `n_company`.`project` (`projName`, `startDate`, `deptId`) VALUES ('javaproject', '2015-10-10', '2');
 INSERT INTO `n_company`.`project` (`projName`, `startDate`, `deptId`) VALUES ('dotnetproject', '2015-12-12', '1');

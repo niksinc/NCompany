@@ -1,6 +1,5 @@
 package com.nik.ncompany.dao.jdbc;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -15,12 +14,13 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nik.ncompany.dao.ProjectDao;
-import com.nik.ncompany.domain.Employee;
 import com.nik.ncompany.domain.Project;
 
 @Repository("projectDaojdbc")
+@Transactional
 public class ProjectDaojdbc implements ProjectDao{
 
 	@Autowired
@@ -40,8 +40,7 @@ public class ProjectDaojdbc implements ProjectDao{
 		jdbcInsert = new SimpleJdbcInsert(dataSource)
 		                 .withTableName("project")
 		                 .usingGeneratedKeyColumns("projId")
-		                 .usingColumns("projName", "deptId", "startDate","endDate");
-		
+		                 .usingColumns("projName", "startDate","endDate", "deptId");
 	}
 	
 	@Override
@@ -71,6 +70,7 @@ public class ProjectDaojdbc implements ProjectDao{
 	@Override
 	public void insertProject(Project project) {
 		SqlParameterSource params = new BeanPropertySqlParameterSource(project);
+		System.out.println("params are "+params.getValue("startDate"));
 		Number newId = jdbcInsert.executeAndReturnKey(params);
 		project.setProjId(newId.intValue());
 		
@@ -78,25 +78,25 @@ public class ProjectDaojdbc implements ProjectDao{
 
 	@Override
 	public void deleteProject(Project project) {
+		
 		String sql  ="delete from project where projId=?";
 		jdbcTemplate.update(sql,Integer.valueOf(project.getProjId()));
-		
 	}
 
 	@Override
 	public int updateProject(int projId, Project project) {
-		String sql = "update project  set projName=:projName ,deptId=:deptId,startDate=:startDate, endDate=:endDate where projId=:pId";
+		String sql = "update project  set projName=:projName ,deptId=:deptId,startDate=:startDate, endDate=:endDate where projId=:projId";
 		String projName;
 		int deptId;
-		Date startDate,endDate;
+		String startDate,endDate;
 
 		MapSqlParameterSource params;
 		int rowsAffected;
 		
 		projName = project.getProjName();
-		deptId = project.getDepartmentId();
-		startDate = project.getprojStartDate();
-		endDate = project.getprojEndDate();
+		deptId = project.getdeptId();
+		startDate = project.getStartDate();
+		endDate = project.getEndDate();
 		
 		params = new MapSqlParameterSource("projId", projId);
 		params.addValue("projName", projName);

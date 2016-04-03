@@ -1,16 +1,14 @@
 package com.nik.ncompany.domain;
 
-import java.sql.Date;
-
 public class Project {
 	
-	private int projId,departmentId;
+	private int projId,deptId;
 	private String projName;
-	private Date projStartDate,projEndDate;
+	private String projStartDate,projEndDate;
 	
-	public Project(String projName,int departmentId,  Date projStartDate) {
+	public Project(String projName,int deptId,  String projStartDate) {
 		super();
-		this.departmentId = departmentId;
+		this.deptId = deptId;
 		this.projName = projName;
 		this.projStartDate = projStartDate;
 	}
@@ -21,11 +19,11 @@ public class Project {
 	public void setProjId(int projId) {
 		this.projId = projId;
 	}
-	public int getDepartmentId() {
-		return departmentId;
+	public int getdeptId() {
+		return deptId;
 	}
-	public void setDepartmentId(int departmentId) {
-		this.departmentId = departmentId;
+	public void setdeptId(int deptId) {
+		this.deptId = deptId;
 	}
 	public String getProjName() {
 		return projName;
@@ -33,16 +31,16 @@ public class Project {
 	public void setProjName(String projName) {
 		this.projName = projName;
 	}
-	public Date getprojStartDate() {
+	public String getStartDate() {
 		return projStartDate;
 	}
-	public void setprojStartDate(Date projStartDate) {
+	public void setStartDate(String projStartDate) {
 		this.projStartDate = projStartDate;
 	}
-	public Date getprojEndDate() {
+	public String getEndDate() {
 		return projEndDate;
 	}
-	public void setprojEndDate(Date projEndDate) {
+	public void setEndDate(String projEndDate) {
 		this.projEndDate = projEndDate;
 	}
 	
