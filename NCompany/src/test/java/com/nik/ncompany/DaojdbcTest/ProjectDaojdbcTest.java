@@ -33,16 +33,16 @@ public class ProjectDaojdbcTest {
 	
 	@Before
 	public void setup() {
-		/* We will use this Employee in various tests. The student already be
+		/* We will use this Project in various tests. The project already be
 		 * in the database
 		 */
 		setupProject = new Project("phpproj", 1,"2016-2-2");
-		setupProjectId = 1;   /* In the DB, the student should have this id */
+		setupProjectId = 1;   /* In the DB, the project should have this id */
 		setupProject.setProjId(setupProjectId);
 	}
 	
-	/* The following test demonstrate the expected employee is kin the database or 
-	 * not if the given employee is not in the database then the test will failed
+	/* The following test demonstrate the expected project is kin the database or 
+	 * not if the given project is not in the database then the test will failed
 	 */ 
 		@Test
 		public void testFindEmployeeByName() throws Exception {
@@ -54,7 +54,7 @@ public class ProjectDaojdbcTest {
 		}
 		
 		
-		/* The Following] test is expect the illegal argument id the employee
+		/* The Following test is expect the illegal argument id the project
 		 * object will inserted in the database then our test will failed
 		 * if it will not inserted then our test will pass
 		 */
@@ -74,14 +74,11 @@ public class ProjectDaojdbcTest {
 				fail();
 			}
 			catch(DataIntegrityViolationException ex){
-				/* The Employee insert will not have rollback 
+				/* The Project insert will not have rollback 
 				 * because we have a checked exception */
 				logger.info("Project isert failed becouse exception"+ex);
 			}
 			assertTrue(projCount == projectDaojdbc.getProjectCount());
 		}
-		
-		
-	
 
 }

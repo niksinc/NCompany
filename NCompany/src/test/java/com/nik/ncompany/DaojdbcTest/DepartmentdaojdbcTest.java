@@ -32,17 +32,17 @@ public class DepartmentdaojdbcTest {
 	
 	@Before
 	public void setup() {
-		/* We will use this Employee in various tests. The student already be
+		/* We will use this Department in various tests. The department already be
 		 * in the database
 		 */
 		setupDepartment = new Department("account", "California");
-		setupDepartmentId = 1;   /* In the DB, the student should have this id */
+		setupDepartmentId = 1;   /* In the DB, the department should have this id */
 		setupDepartment.setDeptId(setupDepartmentId);
 	}
 	
 	
-	/* The following test demonstrate the expected employee is kin the database or 
-	 * not if the given employee is not in the database then the test will failed
+	/* The following test demonstrate the expected department is kin the database or 
+	 * not if the given department is not in the database then the test will failed
 	 */ 
 		@Test
 		public void testFindDepartmentByName() throws Exception {
@@ -53,7 +53,7 @@ public class DepartmentdaojdbcTest {
 			assertEquals(setupDepartment.getDeptId(),deptFromDb.getDeptId());
 		}
 		
-		/* The Following] test is expect the illegal argument id the employee
+		/* The Following] test is expect the illegal argument id the department
 		 * object will inserted in the database then our test will failed
 		 * if it will not inserted then our test will pass
 		 */
@@ -73,7 +73,7 @@ public class DepartmentdaojdbcTest {
 				fail();
 			}
 			catch(DataIntegrityViolationException ex){
-				/* The Employee insert will not have rollback 
+				/* The Department insert will not have rollback 
 				 * because we have a checked exception */
 				logger.info("Employee isert failed becouse exception"+ex);
 			}

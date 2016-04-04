@@ -1,5 +1,4 @@
 package com.nik.ncompany.DaojdbcTest;
-
 import static org.junit.Assert.*;
 
 import org.apache.log4j.Logger;
@@ -77,6 +76,4 @@ public class EmplpoyeeDaoJdbcTest {
 			}
 			assertTrue(empCount == employeeDaojdbc.getEmployeeCount());
 		}
-
-
 }
