@@ -6,7 +6,7 @@ public class Project {
 	private String projName;
 	private String projStartDate,projEndDate;
 	
-	public Project(String projName,int deptId,  String projStartDate) {
+	public Project(String projName,int deptId, String projStartDate) {
 		super();
 		this.deptId = deptId;
 		this.projName = projName;
