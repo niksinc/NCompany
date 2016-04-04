@@ -1,4 +1,4 @@
-package com.nik.DaojdbcTest;
+package com.nik.ncompany.DaojdbcTest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -15,73 +15,68 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.nik.ncompany.dao.EmployeeDao;
-import com.nik.ncompany.dao.ProjectDao;
-import com.nik.ncompany.domain.Employee;
-import com.nik.ncompany.domain.Project;
+import com.nik.ncompany.dao.DepartmentDao;
+import com.nik.ncompany.domain.Department;
+
 
 @ContextConfiguration("classpath:ncompany-test-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
-public class ProjectDaojdbcTest {
+public class DepartmentdaojdbcTest {
 	
 	@Autowired
-	@Qualifier("projectDaojdbc")
-	private ProjectDao projectDaojdbc;
-	private Project setupProject;   /*  Initialized in the setup() method  */
-	private int setupProjectId;    /*  Initialized in the setup() method  */
-	private Logger logger =  Logger.getLogger(EmplpoyeeDaoJdbcTest.class);
+	@Qualifier("departmentDaojdbc")
+	private DepartmentDao departmentDaojdbc;
+	private Department setupDepartment;   /*  Initialized in the setup() method  */
+	private int setupDepartmentId;    /*  Initialized in the setup() method  */
+	private Logger logger =  Logger.getLogger(DepartmentdaojdbcTest.class);
 	
 	@Before
 	public void setup() {
 		/* We will use this Employee in various tests. The student already be
 		 * in the database
 		 */
-		setupProject = new Project("phpproj", 1,"2016-2-2");
-		setupProjectId = 1;   /* In the DB, the student should have this id */
-		setupProject.setProjId(setupProjectId);
+		setupDepartment = new Department("account", "California");
+		setupDepartmentId = 1;   /* In the DB, the student should have this id */
+		setupDepartment.setDeptId(setupDepartmentId);
 	}
+	
 	
 	/* The following test demonstrate the expected employee is kin the database or 
 	 * not if the given employee is not in the database then the test will failed
 	 */ 
 		@Test
-		public void testFindEmployeeByName() throws Exception {
-			String projName = setupProject.getProjName();
-			Project projFromDb;
-			projFromDb = projectDaojdbc.findProjectByName(projName);
-			assertNotNull(projFromDb);
-			assertEquals(setupProject.getProjId(),projFromDb.getProjId());
+		public void testFindDepartmentByName() throws Exception {
+			String deptName = setupDepartment.getDeptName();
+			Department deptFromDb;
+			deptFromDb = departmentDaojdbc.findDepartmentByName(deptName);
+			assertNotNull(deptFromDb);
+			assertEquals(setupDepartment.getDeptId(),deptFromDb.getDeptId());
 		}
-		
 		
 		/* The Following] test is expect the illegal argument id the employee
 		 * object will inserted in the database then our test will failed
 		 * if it will not inserted then our test will pass
 		 */
 		@Test (expected=IllegalArgumentException.class)
-		public void testNullStudentInsert(){
-			projectDaojdbc.insertProject(null);
+		public void testNullDepartmentInsert(){
+			departmentDaojdbc.insertDepartment(null);
 		}
 		
 		/* This test will demonstrate the handling of unchecked exception */
 		@Test 
-		public void testBadEmailInsert(){
-			int projCount = projectDaojdbc.getProjectCount();
+		public void testBadDEpartmentInsert(){
+			int empCount = departmentDaojdbc.getDepartmentCount();
 					
-			Project project = new Project (null,2,"2015-11-11");
+			Department department = new Department(null,"cali");
 			try{
-				projectDaojdbc.insertProject(project);
+				departmentDaojdbc.insertDepartment(department);
 				fail();
 			}
 			catch(DataIntegrityViolationException ex){
 				/* The Employee insert will not have rollback 
 				 * because we have a checked exception */
-				logger.info("Project isert failed becouse exception"+ex);
+				logger.info("Employee isert failed becouse exception"+ex);
 			}
-			assertTrue(projCount == projectDaojdbc.getProjectCount());
+			assertTrue(empCount == departmentDaojdbc.getDepartmentCount());
 		}
-		
-		
-	
-
 }

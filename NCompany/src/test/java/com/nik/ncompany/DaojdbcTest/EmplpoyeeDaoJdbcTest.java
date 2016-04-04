@@ -1,4 +1,4 @@
-package com.nik.DaojdbcTest;
+package com.nik.ncompany.DaojdbcTest;
 
 import static org.junit.Assert.*;
 
