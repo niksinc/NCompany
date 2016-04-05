@@ -19,7 +19,7 @@
 	<import resource="classpath:db-context.xml"/>
 	
 	<context:annotation-config />
-	<context:component-scan base-package="com.nik.ncompany">
+	<context:component-scan base-package="edu.npu.zu">
 		<context:exclude-filter type="regex"  expression="com.nik.ncompany.controller"/>
 	</context:component-scan>
 	

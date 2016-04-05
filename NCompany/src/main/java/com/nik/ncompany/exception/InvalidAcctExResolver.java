@@ -9,16 +9,16 @@ import javax.ws.rs.ext.Provider;
 
 @Provider
 public class InvalidAcctExResolver implements ExceptionMapper<InvalidAcctException> {
- 
-    @Override
-    public Response toResponse(InvalidAcctException ex) {
-    	ResponseBuilder respBuilder;
-        Status httpStatus = Status.UNAUTHORIZED;
-        
-        respBuilder = Response.status(httpStatus);
-        respBuilder.entity(ex.getMessage());
-        respBuilder.type(MediaType.TEXT_PLAIN);
-        return respBuilder.build();
-    }
+
+	@Override
+	public Response toResponse(InvalidAcctException ex) {
+		ResponseBuilder respBuilder;
+		Status httpStatus = Status.UNAUTHORIZED;
+
+		respBuilder = Response.status(httpStatus);
+		respBuilder.entity(ex.getMessage());
+		respBuilder.type(MediaType.TEXT_PLAIN);
+		return respBuilder.build();
+	}
 
 }

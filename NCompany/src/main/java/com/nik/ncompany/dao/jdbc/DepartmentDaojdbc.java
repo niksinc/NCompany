@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nik.ncompany.dao.DepartmentDao;
 import com.nik.ncompany.domain.Department;
-import com.nik.ncompany.domain.Employee;
 
 @Repository("departmentDaojdbc")
 @Transactional
@@ -27,44 +26,42 @@ public class DepartmentDaojdbc implements DepartmentDao {
 	@Autowired
 	@Qualifier("dataSource")
 	private DataSource dataSource;
-	
+
 	private JdbcTemplate jdbcTemplate;
 	private NamedParameterJdbcTemplate dbTemplate;
 	private SimpleJdbcInsert jdbcInsert;
 	private DepartmentRowMapper departmentRowMapper;
-	
+
 	@PostConstruct
 	public void setup() {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 		dbTemplate = new NamedParameterJdbcTemplate(dataSource);
 		departmentRowMapper = new DepartmentRowMapper();
-		jdbcInsert = new SimpleJdbcInsert(dataSource)
-		                 .withTableName("department")
-		                 .usingGeneratedKeyColumns("deptId")
-		                 .usingColumns("deptName", "location");
+		jdbcInsert = new SimpleJdbcInsert(dataSource).withTableName("department").usingGeneratedKeyColumns("deptId")
+				.usingColumns("deptName", "location");
 	}
 
 	@Override
 	public Department findDepartmentById(int deptId) {
-		String sql  ="select * FROM department WHERE deptId =:deptId";
-		MapSqlParameterSource params = new MapSqlParameterSource("deptId",deptId);
+		String sql = "select * FROM department WHERE deptId =:deptId";
+		MapSqlParameterSource params = new MapSqlParameterSource("deptId", deptId);
 		List<Department> matchingDepartment = dbTemplate.query(sql, params, departmentRowMapper);
 		if (matchingDepartment.size() == 0) {
 			return null;
 		}
 		return matchingDepartment.get(0);
-		
+
 	}
 
 	@Override
 	public Department findDepartmentByName(String deptName) {
-		String sql  ="select * FROM department WHERE deptName =:deptName";
-		MapSqlParameterSource params = new MapSqlParameterSource("deptName",deptName);
+		String sql = "select * FROM department WHERE deptName =:deptName";
+		MapSqlParameterSource params = new MapSqlParameterSource("deptName", deptName);
 		List<Department> matchingDepartment = dbTemplate.query(sql, params, departmentRowMapper);
 		if (matchingDepartment.size() == 0) {
 			return null;
 		}
-		
+
 		return matchingDepartment.get(0);
 	}
 
@@ -73,27 +70,27 @@ public class DepartmentDaojdbc implements DepartmentDao {
 		SqlParameterSource params = new BeanPropertySqlParameterSource(department);
 		Number newId = jdbcInsert.executeAndReturnKey(params);
 		department.setDeptId(newId.intValue());
-		
+
 	}
 
 	@Override
 	public void deleteDepartment(Department department) {
-		String sql  ="delete from department where deptId=?";
-		jdbcTemplate.update(sql,Integer.valueOf(department.getDeptId()));
-		
+		String sql = "delete from department where deptId=?";
+		jdbcTemplate.update(sql, Integer.valueOf(department.getDeptId()));
+
 	}
 
 	@Override
 	public int updateDepartment(int deptId, Department department) {
 		String sql = "update department  set deptName=:deptName,location=:location where deptId=:deptId";
-		String deptName,location;
-		
+		String deptName, location;
+
 		MapSqlParameterSource params;
 		int rowsAffected;
-		
+
 		deptName = department.getDeptName();
 		location = department.getLocation();
-		
+
 		params = new MapSqlParameterSource("deptId", deptId);
 		params.addValue("deptName", deptName);
 		params.addValue("location", location);
@@ -114,7 +111,5 @@ public class DepartmentDaojdbc implements DepartmentDao {
 		List<Department> departmentList = jdbcTemplate.query(sql, departmentRowMapper);
 		return departmentList;
 	}
-	
-	
-	
+
 }

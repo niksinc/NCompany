@@ -21,32 +21,30 @@ import com.nik.ncompany.domain.Project;
 
 @Repository("projectDaojdbc")
 @Transactional
-public class ProjectDaojdbc implements ProjectDao{
+public class ProjectDaojdbc implements ProjectDao {
 
 	@Autowired
 	@Qualifier("dataSource")
 	private DataSource dataSource;
-	
+
 	private JdbcTemplate jdbcTemplate;
 	private NamedParameterJdbcTemplate dbTemplate;
 	private SimpleJdbcInsert jdbcInsert;
 	private ProjectRowMapper projectRowMapper;
-	
+
 	@PostConstruct
 	public void setup() {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 		dbTemplate = new NamedParameterJdbcTemplate(dataSource);
 		projectRowMapper = new ProjectRowMapper();
-		jdbcInsert = new SimpleJdbcInsert(dataSource)
-		                 .withTableName("project")
-		                 .usingGeneratedKeyColumns("projId")
-		                 .usingColumns("projName", "startDate","endDate", "deptId");
+		jdbcInsert = new SimpleJdbcInsert(dataSource).withTableName("project").usingGeneratedKeyColumns("projId")
+				.usingColumns("projName", "startDate", "endDate", "deptId");
 	}
-	
+
 	@Override
 	public Project findProjectById(int projId) {
-		String sql  ="select * FROM project WHERE projId =:projId";
-		MapSqlParameterSource params = new MapSqlParameterSource("projId",projId);
+		String sql = "select * FROM project WHERE projId =:projId";
+		MapSqlParameterSource params = new MapSqlParameterSource("projId", projId);
 		List<Project> matchingProject = dbTemplate.query(sql, params, projectRowMapper);
 		if (matchingProject.size() == 0) {
 			return null;
@@ -57,8 +55,8 @@ public class ProjectDaojdbc implements ProjectDao{
 
 	@Override
 	public Project findProjectByName(String projName) {
-		String sql  ="select * FROM project WHERE projName =:projName";
-		MapSqlParameterSource params = new MapSqlParameterSource("projName",projName);
+		String sql = "select * FROM project WHERE projName =:projName";
+		MapSqlParameterSource params = new MapSqlParameterSource("projName", projName);
 		List<Project> matchingProject = dbTemplate.query(sql, params, projectRowMapper);
 		if (matchingProject.size() == 0) {
 			return null;
@@ -70,17 +68,17 @@ public class ProjectDaojdbc implements ProjectDao{
 	@Override
 	public void insertProject(Project project) {
 		SqlParameterSource params = new BeanPropertySqlParameterSource(project);
-		System.out.println("params are "+params.getValue("startDate"));
+		System.out.println("params are " + params.getValue("startDate"));
 		Number newId = jdbcInsert.executeAndReturnKey(params);
 		project.setProjId(newId.intValue());
-		
+
 	}
 
 	@Override
 	public void deleteProject(Project project) {
-		
-		String sql  ="delete from project where projId=?";
-		jdbcTemplate.update(sql,Integer.valueOf(project.getProjId()));
+
+		String sql = "delete from project where projId=?";
+		jdbcTemplate.update(sql, Integer.valueOf(project.getProjId()));
 	}
 
 	@Override
@@ -88,24 +86,24 @@ public class ProjectDaojdbc implements ProjectDao{
 		String sql = "update project  set projName=:projName ,deptId=:deptId,startDate=:startDate, endDate=:endDate where projId=:projId";
 		String projName;
 		int deptId;
-		String startDate,endDate;
+		String startDate, endDate;
 
 		MapSqlParameterSource params;
 		int rowsAffected;
-		
+
 		projName = project.getProjName();
 		deptId = project.getdeptId();
 		startDate = project.getStartDate();
 		endDate = project.getEndDate();
-		
+
 		params = new MapSqlParameterSource("projId", projId);
 		params.addValue("projName", projName);
 		params.addValue("deptId", deptId);
 		params.addValue("startDate", startDate);
 		params.addValue("endDate", endDate);
-	
+
 		rowsAffected = dbTemplate.update(sql, params);
-		
+
 		return rowsAffected;
 
 	}
@@ -122,6 +120,5 @@ public class ProjectDaojdbc implements ProjectDao{
 		List<Project> projectList = jdbcTemplate.query(sql, projectRowMapper);
 		return projectList;
 	}
-	
 
 }

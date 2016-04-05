@@ -15,70 +15,71 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.nik.ncompany.dao.EmployeeDao;
 import com.nik.ncompany.dao.ProjectDao;
-import com.nik.ncompany.domain.Employee;
 import com.nik.ncompany.domain.Project;
 
 @ContextConfiguration("classpath:ncompany-test-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ProjectDaojdbcTest {
-	
+
 	@Autowired
 	@Qualifier("projectDaojdbc")
 	private ProjectDao projectDaojdbc;
-	private Project setupProject;   /*  Initialized in the setup() method  */
-	private int setupProjectId;    /*  Initialized in the setup() method  */
-	private Logger logger =  Logger.getLogger(EmplpoyeeDaoJdbcTest.class);
-	
+	private Project setupProject; /* Initialized in the setup() method */
+	private int setupProjectId; /* Initialized in the setup() method */
+	private Logger logger = Logger.getLogger(EmplpoyeeDaoJdbcTest.class);
+
 	@Before
 	public void setup() {
-		/* We will use this Project in various tests. The project already be
-		 * in the database
+		/*
+		 * We will use this Project in various tests. The project already be in
+		 * the database
 		 */
-		setupProject = new Project("phpproj", 1,"2016-2-2");
-		setupProjectId = 1;   /* In the DB, the project should have this id */
+		setupProject = new Project("phpproj", 1, "2016-2-2");
+		setupProjectId = 1; /* In the DB, the project should have this id */
 		setupProject.setProjId(setupProjectId);
 	}
-	
-	/* The following test demonstrate the expected project is kin the database or 
+
+	/*
+	 * The following test demonstrate the expected project is in the database or
 	 * not if the given project is not in the database then the test will failed
-	 */ 
-		@Test
-		public void testFindEmployeeByName() throws Exception {
-			String projName = setupProject.getProjName();
-			Project projFromDb;
-			projFromDb = projectDaojdbc.findProjectByName(projName);
-			assertNotNull(projFromDb);
-			assertEquals(setupProject.getProjId(),projFromDb.getProjId());
+	 */
+	@Test
+	public void testFindEmployeeByName() throws Exception {
+		String projName = setupProject.getProjName();
+		Project projFromDb;
+		projFromDb = projectDaojdbc.findProjectByName(projName);
+		assertNotNull(projFromDb);
+		assertEquals(setupProject.getProjId(), projFromDb.getProjId());
+	}
+
+	/*
+	 * The Following test is expect the illegal argument id the project object
+	 * will inserted in the database then our test will failed if it will not
+	 * inserted then our test will pass
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testNullStudentInsert() {
+		projectDaojdbc.insertProject(null);
+	}
+
+	/* This test will demonstrate the handling of unchecked exception */
+	@Test
+	public void testBadEmailInsert() {
+		int projCount = projectDaojdbc.getProjectCount();
+
+		Project project = new Project(null, 2, "2015-11-11");
+		try {
+			projectDaojdbc.insertProject(project);
+			fail();
+		} catch (DataIntegrityViolationException ex) {
+			/*
+			 * The Project insert will not have rollback because we have a
+			 * checked exception
+			 */
+			logger.info("Project isert failed becouse exception" + ex);
 		}
-		
-		
-		/* The Following test is expect the illegal argument id the project
-		 * object will inserted in the database then our test will failed
-		 * if it will not inserted then our test will pass
-		 */
-		@Test (expected=IllegalArgumentException.class)
-		public void testNullStudentInsert(){
-			projectDaojdbc.insertProject(null);
-		}
-		
-		/* This test will demonstrate the handling of unchecked exception */
-		@Test 
-		public void testBadEmailInsert(){
-			int projCount = projectDaojdbc.getProjectCount();
-					
-			Project project = new Project (null,2,"2015-11-11");
-			try{
-				projectDaojdbc.insertProject(project);
-				fail();
-			}
-			catch(DataIntegrityViolationException ex){
-				/* The Project insert will not have rollback 
-				 * because we have a checked exception */
-				logger.info("Project isert failed becouse exception"+ex);
-			}
-			assertTrue(projCount == projectDaojdbc.getProjectCount());
-		}
+		assertTrue(projCount == projectDaojdbc.getProjectCount());
+	}
 
 }

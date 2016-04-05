@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nik.ncompany.DaojdbcTest.EmplpoyeeDaoJdbcTest;
 import com.nik.ncompany.domain.Employee;
-import com.nik.ncompany.services.EmployeeDaoService;
 import com.nik.ncompany.services.EmployeeDaoServiceImpl;
 
 @ContextConfiguration("classpath:ncompany-test-context.xml")
@@ -27,24 +26,24 @@ public class EmployeeDaoServiceTest {
 	@Autowired
 	@Qualifier("employeeDaoServiceImpl")
 	private EmployeeDaoServiceImpl employeeDaoServiceImpl;
-	private Logger logger =  Logger.getLogger(EmplpoyeeDaoJdbcTest.class);
-	
+	private Logger logger = Logger.getLogger(EmplpoyeeDaoJdbcTest.class);
+
 	/* This test will demonstrate the handling of unchecked exception */
-	@Test 
-	public void testBadEmailInsert(){
+	@Test
+	public void testBadEmailInsert() {
 		int empCount = employeeDaoServiceImpl.getEmployeeCount();
-				
-		Employee emp = new Employee ("Ram","surti",null,"741852963");
-		try{
-			employeeDaoServiceImpl.insertEmployee(emp );
+
+		Employee emp = new Employee("Ram", "surti", null, "741852963");
+		try {
+			employeeDaoServiceImpl.insertEmployee(emp);
 			fail();
-		}
-		catch(DataIntegrityViolationException ex){
-			
-			/* The Employee insert will not have rollback 
-			 * because we have a checked exception */
-			
-			logger.info("Employee isert failed becouse exception"+ex);
+		} catch (DataIntegrityViolationException ex) {
+
+			/*
+			 * The Employee insert will not have rollback because we have a
+			 * checked exception
+			 */
+			logger.info("Employee isert failed becouse exception" + ex);
 		}
 		assertTrue(empCount == employeeDaoServiceImpl.getEmployeeCount());
 	}

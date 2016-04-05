@@ -16,16 +16,20 @@ import com.nik.ncompany.exception.UnknownResourceExResolver;
 @ApplicationPath("/")
 public class RestApplicationConfig extends Application {
 	private Set<Class<?>> restClassSet = new HashSet<Class<?>>();
-	
+
 	public RestApplicationConfig() {
-		/* AuthorizationFilter is a servlet filter that could automatically perform authorization on all incoming requests */
-//		restClassSet.add(AuthorizationFilter.class);
+		/*
+		 * AuthorizationFilter is a servlet filter that could automatically
+		 * perform authorization on all incoming requests
+		 */
+		// restClassSet.add(AuthorizationFilter.class);
 		restClassSet.add(JacksonFeature.class);
 		restClassSet.add(EmployeeRestHandler.class);
 		restClassSet.add(InvalidAcctExResolver.class);
 		restClassSet.add(UnknownResourceExResolver.class);
 	}
-	
+
+	@Override
 	public Set<Class<?>> getClasses() {
 		return restClassSet;
 	}

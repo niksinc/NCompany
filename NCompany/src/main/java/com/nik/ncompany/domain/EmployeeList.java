@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -16,7 +15,7 @@ public class EmployeeList implements Serializable {
 
 	public EmployeeList() {
 	}
-	
+
 	public List<Employee> getSList() {
 		return sList;
 	}
@@ -24,24 +23,26 @@ public class EmployeeList implements Serializable {
 	public void setEmployeeList(List<Employee> newStudList) {
 		this.sList = newStudList;
 	}
-	
+
 	public int numEntries() {
-		if (sList == null) return 0;
+		if (sList == null)
+			return 0;
 		return sList.size();
 	}
-	
+
 	public Employee getEmployee(int idx) {
 		return sList.get(idx);
 	}
-	
+
+	@Override
 	public String toString() {
 		String listStr;
-		
+
 		listStr = "EmployeeList{";
-		for (Employee entry: sList) {
+		for (Employee entry : sList) {
 			listStr = listStr + "\n\t" + entry;
 		}
-		
+
 		listStr = listStr + "\n}";
 		return listStr;
 	}
