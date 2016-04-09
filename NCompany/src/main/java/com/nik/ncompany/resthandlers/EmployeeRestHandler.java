@@ -3,6 +3,7 @@ package com.nik.ncompany.resthandlers;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -79,19 +80,19 @@ public class EmployeeRestHandler {
 	/* Test Url:  Use HTTP Delete command
 	 * http://localhost:8080/zuniversity/webservices/studrestapp/student/100
 	 */
-	/*@DELETE
+	@DELETE
 	@Path("/employee/{id}")
-	public Response deleteStudent(@PathParam("id") int id) {
+	public Response deleteEmployee(@PathParam("id") int id) {
 		Employee removedEmployee;
 		ResponseBuilder respBuilder;
 		
-		//removedEmployee = employeeDaoServiceImpl.deleteEmployee(id);
-		if (removedStud == null) {
+		removedEmployee = employeeDaoServiceImpl.deleteEmployeeById(id);
+		if (removedEmployee == null) {
 			respBuilder = Response.status(Status.NOT_FOUND);
 		} else {
 			respBuilder = Response.ok();
 		}
 		return respBuilder.build();
 	}
-*/	
+	
 }

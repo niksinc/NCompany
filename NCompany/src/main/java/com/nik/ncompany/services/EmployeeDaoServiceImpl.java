@@ -50,7 +50,12 @@ public class EmployeeDaoServiceImpl implements EmployeeDaoService {
 		employeeDaojdbc.deleteEmployee(employee);
 		
 	}
-
+	@Override
+	public Employee deleteEmployeeById(int empId){
+		Employee employee =employeeDaojdbc.findEmployeeById(empId);
+		employeeDaojdbc.deleteEmployee(employee);
+		return employee;
+	}
 	@Override
 	public int updateEmployee(int empId, Employee employee) {
 		// TODO Auto-generated method stub
