@@ -10,7 +10,7 @@ import com.nik.ncompany.dao.EmployeeDao;
 import com.nik.ncompany.domain.Employee;
 
 @Service("employeeDaoServiceImpl")
-public class EmployeeDaoServiceImpl implements EmployeeDao {
+public class EmployeeDaoServiceImpl implements EmployeeDaoService {
 
 	@Autowired
 	@Qualifier("employeeDaojdbc")
@@ -18,54 +18,58 @@ public class EmployeeDaoServiceImpl implements EmployeeDao {
 
 	@Override
 	public Employee findEmployeeById(int empId) {
+		// TODO Auto-generated method stub
 		return employeeDaojdbc.findEmployeeById(empId);
-
+		
 	}
 
 	@Override
 	public Employee findEmployeeByName(String fName) {
+		// TODO Auto-generated method stub
 		return employeeDaojdbc.findEmployeeByName(fName);
-
+		
 	}
 
 	@Override
 	public Employee findEmployeeByEmail(String email) {
-
+		// TODO Auto-generated method stub
 		return employeeDaojdbc.findEmployeeByEmail(email);
+		
 	}
 
 	@Override
-	public void insertEmployee(Employee employee) {
-		if (findEmployeeByEmail(employee.getEmail()) == null)
-			employeeDaojdbc.insertEmployee(employee);
-		else
-			System.out.println("Employee is Already Exist with this email");
-
+	public void addEmployee(Employee employee) {
+		// TODO Auto-generated method stub
+		employeeDaojdbc.insertEmployee(employee);
+		
 	}
 
 	@Override
 	public void deleteEmployee(Employee employee) {
-
+		// TODO Auto-generated method stub
 		employeeDaojdbc.deleteEmployee(employee);
+		
 	}
 
 	@Override
 	public int updateEmployee(int empId, Employee employee) {
-
+		// TODO Auto-generated method stub
 		return employeeDaojdbc.updateEmployee(empId, employee);
+		
 	}
 
 	@Override
 	public int getEmployeeCount() {
-
+		// TODO Auto-generated method stub
+		
 		return employeeDaojdbc.getEmployeeCount();
-
 	}
 
 	@Override
 	public List<Employee> getEmployeeList() {
+		// TODO Auto-generated method stub
 		return employeeDaojdbc.getEmployeeList();
-
 	}
 
+	
 }

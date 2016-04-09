@@ -16,7 +16,7 @@ public interface EmployeeDaoService {
 
 	public void deleteEmployee(Employee employee);
 
-	public int updateEmployee(long id, Employee employee);
+	public int updateEmployee(int empId, Employee employee);
 
 	public int getEmployeeCount();
 
