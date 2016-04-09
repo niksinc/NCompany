@@ -23,7 +23,7 @@
 		<context:exclude-filter type="regex"  expression="com.nik.ncompany.controller"/>
 	</context:component-scan>
 	
-	<tx:annotation-driven transaction-manager="transactionManager" /> 
+	<tx:annotation-driven transaction-manager="txManager" /> 
 	
 </beans>
 

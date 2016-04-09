@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nik.ncompany.DaojdbcTest.EmplpoyeeDaoJdbcTest;
 import com.nik.ncompany.domain.Employee;
+import com.nik.ncompany.services.EmployeeDaoService;
 import com.nik.ncompany.services.EmployeeDaoServiceImpl;
 
 @ContextConfiguration("classpath:ncompany-test-context.xml")
@@ -25,7 +26,7 @@ import com.nik.ncompany.services.EmployeeDaoServiceImpl;
 public class EmployeeDaoServiceTest {
 	@Autowired
 	@Qualifier("employeeDaoServiceImpl")
-	private EmployeeDaoServiceImpl employeeDaoServiceImpl;
+	private EmployeeDaoService employeeDaoServiceImpl;
 	private Logger logger = Logger.getLogger(EmplpoyeeDaoJdbcTest.class);
 
 	/* This test will demonstrate the handling of unchecked exception */
@@ -35,7 +36,7 @@ public class EmployeeDaoServiceTest {
 
 		Employee emp = new Employee("Ram", "surti", null, "741852963");
 		try {
-			employeeDaoServiceImpl.insertEmployee(emp);
+			employeeDaoServiceImpl.addEmployee(emp);
 			fail();
 		} catch (DataIntegrityViolationException ex) {
 
