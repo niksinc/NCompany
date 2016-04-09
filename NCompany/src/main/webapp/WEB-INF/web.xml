@@ -13,7 +13,7 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
+	
 	<!-- Processes application requests -->
 	<servlet>
 		<servlet-name>appServlet</servlet-name>
@@ -24,17 +24,7 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-		
-	<servlet-mapping>
-		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
-<!-- Creates the Spring Container shared by all Servlets and Filters -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-	
-	
+
 	<!-- Jersey Configuration -->
 	<servlet>
    		 <servlet-name>JerseyWebApplication</servlet-name>
@@ -57,5 +47,6 @@
     	<servlet-name>JerseyWebApplication</servlet-name>
     	<url-pattern>/webservices/*</url-pattern>
   	</servlet-mapping>
+  	
 
 </web-app>

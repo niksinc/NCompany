@@ -16,10 +16,10 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
-	<import resource="classpath:db-context.xml"/>
+	<import resource="classpath:datasource.xml"/>
 	
 	<context:annotation-config />
-	<context:component-scan base-package="edu.npu.zu">
+	<context:component-scan base-package="com.nik.ncompany">
 		<context:exclude-filter type="regex"  expression="com.nik.ncompany.controller"/>
 	</context:component-scan>
 	
