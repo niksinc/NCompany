@@ -19,7 +19,7 @@ public class NcompanyHomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	@RequestMapping(value = "/home", method = RequestMethod.POST)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome to NCompany rest controller! The client locale is {}.", locale);
 
