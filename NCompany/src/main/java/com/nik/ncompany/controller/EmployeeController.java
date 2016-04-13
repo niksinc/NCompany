@@ -31,6 +31,7 @@ public class EmployeeController {
 	@RequestMapping(value = "/addEmployee", method = RequestMethod.GET)
 	public String addEmployee(Locale locale, Model model) {
 		logger.info("Wel {}.", locale);
+		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		String formattedDate = dateFormat.format(date);
