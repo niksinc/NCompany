@@ -26,8 +26,9 @@ public class EmployeeController {
 	@Qualifier("employeeDaoServiceImpl")
 	private EmployeeDaoService employeeDaoServiceImpl;
 	
-	private static final Logger logger = LoggerFactory.getLogger(NcompanyHomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
+	//http://localhost:8080/ncompany/addEmployee
 	@RequestMapping(value = "/addEmployee", method = RequestMethod.GET)
 	public String addEmployee(Locale locale, Model model) {
 		logger.info("Wel {}.", locale);
@@ -38,7 +39,8 @@ public class EmployeeController {
 		model.addAttribute("serverTime", formattedDate);
 		return "addEmployee";
 	}
-	
+
+	//http://localhost:8080/ncompany/employeeList
 	@RequestMapping(value = "/employeeList", method = RequestMethod.GET)
 	public ModelAndView employeeList(Locale locale, Model model) {
 		//logger.info("Wel {}.", locale);

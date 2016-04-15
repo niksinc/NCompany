@@ -4,13 +4,13 @@ public class Project {
 
 	private int projId, deptId;
 	private String projName;
-	private String projStartDate, projEndDate;
+	private String StartDate, EndDate;
 
-	public Project(String projName, int deptId, String projStartDate) {
+	public Project(String projName, int deptId, String StartDate) {
 		super();
 		this.deptId = deptId;
 		this.projName = projName;
-		this.projStartDate = projStartDate;
+		this.StartDate = StartDate;
 	}
 
 	public int getProjId() {
@@ -38,19 +38,19 @@ public class Project {
 	}
 
 	public String getStartDate() {
-		return projStartDate;
+		return StartDate;
 	}
 
-	public void setStartDate(String projStartDate) {
-		this.projStartDate = projStartDate;
+	public void setStartDate(String StartDate) {
+		this.StartDate = StartDate;
 	}
 
 	public String getEndDate() {
-		return projEndDate;
+		return EndDate;
 	}
 
-	public void setEndDate(String projEndDate) {
-		this.projEndDate = projEndDate;
+	public void setEndDate(String EndDate) {
+		this.EndDate = EndDate;
 	}
 
 }

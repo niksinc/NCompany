@@ -21,29 +21,26 @@
 <table  class="table table-striped custab" >
 
  <thead>
-    <a href="#" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new Employee</a>
+    <a href="#" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new Project	</a>
         <tr>
-        <th>First Name</th>
-		<th>Last Name</th>
-		<th>email</th>
-		<th>Phone Number</th>
-		<th class="text-center">Action</th>
+	        <th>Project Name</th>
+			<th>Start Date</th>
+			<th>End Date</th>
+			<th class="text-center">Action</th>
         </tr>
     </thead>
 	
-<c:forEach var="emp" items="${employeeList}">
+<c:forEach var="proj" items="${projectList}">
 	<tr>
-		<td>${emp.fName}</td>
-		<td>${emp.lName}</td>
-		<td>${emp.email}</td>
-		<td>${emp.phoneNumber}</td>
+		<td>${proj.projName}</td>
+		<td>${proj.startDate}</td>
+		<td>${proj.endDate}</td>
 		<td class="text-center">
 			<a class='btn btn-info btn-xs' href="#">
 			<span class="glyphicon glyphicon-edit"></span> Edit</a>
 			<a href="#" class="btn btn-danger btn-xs">
 			<span class="glyphicon glyphicon-remove"></span> Del</a>
 		 </td>
-		
 	</tr>
 	 </c:forEach>
 </table>

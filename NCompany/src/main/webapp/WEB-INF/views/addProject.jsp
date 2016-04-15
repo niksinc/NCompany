@@ -17,7 +17,7 @@
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
         	<div class="panel panel-default">
         		<div class="panel-heading">
-			    		<h3 class="panel-title">Add Employee Detail <small>Nks Inc.</small></h3>
+			    		<h3 class="panel-title">Add Project <small>Nks Inc.</small></h3>
 			 			</div>
 			 			<div class="panel-body">
 			    		<form role="form">
@@ -25,29 +25,28 @@
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
 			    					<div class="form-group">
 			    					
-			                <input type="text" name="fName" id="fName" class="form-control input-sm" placeholder="First Name">
+			                <input type="text" name="projName" id="projName" class="form-control input-sm" placeholder="Project Name">
 			    					</div>
 			    				</div>
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
 			    					<div class="form-group">
-			    						<input type="text" name="lName" id="lName" class="form-control input-sm" placeholder="Last Name">
+			    						<input type="text" name="deptId" id="deptId" class="form-control input-sm" placeholder="Department Id">
 			    					</div>
 			    				</div>
 			    			</div>
-
-			    			<div class="form-group">
-			    				<input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
-			    			</div>
-
-			    			<div class="row">
+							<div class="row">
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
 			    					<div class="form-group">
-			    						<input type="text" name="phoneNumber" id="password" class="form-control input-sm" placeholder="PhoneNumber">
+			    						<input type="text" name="startDate" id="startDate" class="form-control input-sm" placeholder="Start Date">
 			    					</div>
 			    				</div>
-			    				
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="text" name="endDate" id="endDate" class="form-control input-sm" placeholder="End Date">
+			    					</div>
+			    				</div>
 			    			</div>
-			    			<input type="submit" name="AddEmpl" value="Add Employee" class="btn btn-info btn-block" />
+			    			<input type="submit" name="AddProj" value="Add Project" class="btn btn-info btn-block" />
 			    			<input type="submit" name="cancel" value="Cancel" class="btn btn-info btn-block" />
 			    		</form>
 			    	</div>

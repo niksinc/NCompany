@@ -109,6 +109,7 @@ public class DepartmentDaojdbc implements DepartmentDao {
 	public List<Department> getDepartmentList() {
 		String sql = "SELECT * FROM department";
 		List<Department> departmentList = jdbcTemplate.query(sql, departmentRowMapper);
+		//System.out.println("the size of the dept"+departmentList.size());
 		return departmentList;
 	}
 
